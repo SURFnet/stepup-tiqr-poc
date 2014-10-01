@@ -1,5 +1,5 @@
-simple-tiqr
-===========
+stepup-tiqr-poc
+===============
 
 Simple demo project explaining the use of the tiqr php library.
 
@@ -32,8 +32,8 @@ Command Line Client
 
 Alternatively, simulate the tiqr app using curl (in which case you can use localhost), eg:
 
-curl http://194.171.175.36:8080/enrol.php --data uid=jd --data displayName=John+Doe
-{"service":{"displayName":"tiqr demo","identifier":"194.171.175.36","logoUrl":"https:\/\/demo.tiqr.org\/img\/tiqrRGB.png","infoUrl":"https:\/\/www.tiqr.org","authenticationUrl":"http:\/\/194.171.175.36:8080\/tiqr.php","ocraSuite":"OCRA-1:HOTP-SHA1-6:QH10-S","enrollmentUrl":"http:\/\/194.171.175.36:8080\/tiqr.php?otp=41deaf45869f0144a9d4c0272d6a09a4504d53b4e03707011ca19a33bf1d332c"},"identity":{"identifier":"1","displayName":"1"}}
+curl http://192.0.2.1:8080/enrol.php --data uid=jd --data displayName=John+Doe
+{"service":{"displayName":"tiqr demo","identifier":"192.0.2.1","logoUrl":"https:\/\/demo.tiqr.org\/img\/tiqrRGB.png","infoUrl":"https:\/\/www.tiqr.org","authenticationUrl":"http:\/\/192.0.2.1:8080\/tiqr.php","ocraSuite":"OCRA-1:HOTP-SHA1-6:QH10-S","enrollmentUrl":"http:\/\/192.0.2.1:8080\/tiqr.php?otp=41deaf45869f0144a9d4c0272d6a09a4504d53b4e03707011ca19a33bf1d332c"},"identity":{"identifier":"1","displayName":"1"}}
 
 
 	$ curl http://localhost:8080/newuser.php
