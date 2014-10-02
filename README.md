@@ -30,6 +30,7 @@ Ansible
 
 	ansible all -m shell -a 'hostname'
 
+
 	ansible -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory  --private-key=~/.vagrant.d/insecure_private_key -u vagrant all -m ping
 	ansible -i ansible/inventory/stepup --private-key=~/.ssh/openstack.pem -u debian all -m ping 
 
