@@ -1,6 +1,9 @@
 {
     "require": {
-        "joostd/tiqr-server": "dev-master"
+        "joostd/tiqr-server": "dev-master",
+        "silex/silex": "~1.2",
+        "twig/twig": "1.*",
+        "fr3d/xmlseclibs": " ~1.3"
     },
     "repositories": [
         {

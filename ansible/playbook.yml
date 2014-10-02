@@ -1,0 +1,58 @@
+---
+- hosts: servers
+  name: This is a Playbook
+
+  vars:
+    packages:
+    - apache2
+    - php5
+    - git
+    - curl
+
+  tasks:
+
+  - action: shell whoami
+    register: whoami
+
+  - name: update apt cache
+    apt: update_cache=yes cache_valid_time=3600
+    sudo: yes
+
+  - name: upgrade the distro
+    apt: upgrade=yes
+    sudo: yes
+
+  - name: install packages
+    apt: name={{ item }} state=present
+    with_items: packages
+    sudo: yes
+    notify:
+      - restart apache
+
+  - name: copy status.html
+    copy: src=files/status.html dest=/var/www
+    sudo: yes
+    notify: something happened
+
+  - name: start and enable apache service
+    service: name=apache2 state=started enabled=yes
+    sudo: yes
+
+  - name: install app
+    git: repo=https://github.com/SURFnet/stepup-tiqr-poc.git dest=~/tiqr
+
+  - name: install composer
+    shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer mode=0755 creates=/usr/local/bin/composer 
+    sudo: yes
+
+  - name: Run composer install
+    shell: cd ~/tiqr && composer install
+
+  handlers:
+  - name: something happened
+    shell: echo "file copied" >> /tmp/some.log
+
+  - name: restart apache
+    sudo: yes
+    action: service name=apache2 state=restarted enabled=yes
+    sudo: yes

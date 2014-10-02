@@ -1,0 +1,7 @@
+default ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
+
+#localhost ansible_connection=local
+
+[servers]
+default
+stepup-tiqr ansible_ssh_user=debian

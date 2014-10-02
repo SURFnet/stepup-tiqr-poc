@@ -1,7 +1,8 @@
-simple-tiqr
-===========
+stepup-tiqr-poc
+===============
 
-Simple demo project explaining the use of the tiqr php library.
+	git clone https://github.com/SURFnet/stepup-tiqr-poc.git
+	cd stepup-tiqr-poc
 
 Many shortcuts:
 
@@ -9,7 +10,6 @@ Many shortcuts:
 - uses google chart api instead of phpqrencode (bad idea except for testing/demo purposes!)
 - using error_log for logging
 
-Goal is to have a simple tiqr demo that can be run with the php builtin web server.
 
 Install
 ===
@@ -25,26 +25,17 @@ where ip is an IP address you're tiqr client can connect to (127.0.0.1 won't do 
 
 Use dump.sh to monitor state (when using the file stateStorage)
 
-Doesn't use more advanced features, like push notifications and step-up authentication.
-
-Command Line Client
+Ansible
 ===
 
-Alternatively, simulate the tiqr app using curl (in which case you can use localhost), eg:
+	ansible all -m shell -a 'hostname'
 
-curl http://194.171.175.36:8080/enrol.php --data uid=jd --data displayName=John+Doe
-{"service":{"displayName":"tiqr demo","identifier":"194.171.175.36","logoUrl":"https:\/\/demo.tiqr.org\/img\/tiqrRGB.png","infoUrl":"https:\/\/www.tiqr.org","authenticationUrl":"http:\/\/194.171.175.36:8080\/tiqr.php","ocraSuite":"OCRA-1:HOTP-SHA1-6:QH10-S","enrollmentUrl":"http:\/\/194.171.175.36:8080\/tiqr.php?otp=41deaf45869f0144a9d4c0272d6a09a4504d53b4e03707011ca19a33bf1d332c"},"identity":{"identifier":"1","displayName":"1"}}
+	ansible -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory  --private-key=~/.vagrant.d/insecure_private_key -u vagrant all -m ping
+	ansible -i ansible/inventory/stepup --private-key=~/.ssh/openstack.pem -u debian all -m ping 
 
+Vagrant
+===
 
-	$ curl http://localhost:8080/newuser.php
-	 --data uid=1 --data displayName=1
-	 --data sid=1
-	 
-	$ curl http://localhost:8080/tiqr.php -G --data key=41b4157315d02bbec5b4bb7dadd09fb13181c33fa4436afd4c1552f88ae6fce7
+	vagrant up
+	ssh-add ~/.vagrant.d/insecure_private_key 
 
-	curl
-	  --data operation=register
-	  --data secret=3132333435363738393031323334353637383930313233343536373839303132
-	   http://localhost:8080/tiqr.php?otp=50d3bc969f5c4975143ecaf27e3cc30451a2c9fcb673828ddd60b46d327e0bb9
-
-	cat /tmp/1.json 
